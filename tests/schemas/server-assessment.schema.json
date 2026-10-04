@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ServerAssessment",
+  "type": "object",
+  "required": ["Computer","ScannedAtUtc","ScannedBy","Status","DurationSeconds","Errors"],
+  "properties": {
+    "Computer":        { "type": "string" },
+    "ScannedAtUtc":    { "type": "string" },
+    "ScannedBy":       { "type": "string" },
+    "Status":          { "type": "string", "enum": ["Success","PartialSuccess","Failed"] },
+    "DurationSeconds": { "type": "number" },
+    "CollectedSections": { "type": "array", "items": { "type": "string" } },
+    "System":     { "type": ["object","null"] },
+    "Hardware":   { "type": ["object","null"] },
+    "Disks":      { "type": "array" },
+    "Network":    { "type": ["object","null"] },
+    "InstalledApplications": { "type": "array" },
+    "ChocolateyPackages":    { "type": "array" },
+    "WindowsFeatures":       { "type": "array" },
+    "Permissions": {
+      "type": ["object","null"],
+      "properties": {
+        "Administrators":        { "type": "array" },
+        "RemoteDesktopUsers":    { "type": "array" },
+        "RemoteManagementUsers": { "type": "array" }
+      }
+    },
+    "Services":        { "type": "array" },
+    "Shares":          { "type": "array" },
+    "ScheduledTasks":  { "type": "array" },
+    "ServiceAccounts": { "type": "array" },
+    "LocalUsers":      { "type": "array" },
+    "FirewallRules":   { "type": "array" },
+    "Iis":             { "type": ["object","null"] },
+    "Certificates":    { "type": "array" },
+    "Chef": {
+      "type": ["object","null"],
+      "properties": {
+        "Installed":            { "type": "boolean" },
+        "Version":              { "type": ["string","null"] },
+        "NodeName":             { "type": ["string","null"] },
+        "ChefServerUrl":        { "type": ["string","null"] },
+        "Environment":          { "type": ["string","null"] },
+        "ValidationClient":     { "type": ["string","null"] },
+        "RunList":              { "type": "array",  "items": { "type": "string" } },
+        "AttributeKeys": {
+          "type": "object",
+          "properties": {
+            "default":   { "type": "array", "items": { "type": "string" } },
+            "normal":    { "type": "array", "items": { "type": "string" } },
+            "override":  { "type": "array", "items": { "type": "string" } },
+            "automatic": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "LastSuccessfulRunUtc": { "type": ["string","null"] }
+      }
+    },
+    "SqlServer": {
+      "type": ["array","null"],
+      "items": {
+        "type": "object",
+        "required": ["InstanceName","ServerName","InstanceId","Version","ConnectionMethod","LiveQueryAvailable"],
+        "properties": {
+          "InstanceName":        { "type": "string" },
+          "ServerName":          { "type": "string" },
+          "InstanceId":          { "type": "string" },
+          "Version":             { "type": ["string","null"] },
+          "Edition":             { "type": ["string","null"] },
+          "PatchLevel":          { "type": ["string","null"] },
+          "Collation":           { "type": ["string","null"] },
+          "AuthenticationMode":  { "type": ["string","null"] },
+          "IsClustered":         { "type": ["boolean","null"] },
+          "InstalledFeatures":   { "type": "array", "items": { "type": "string" } },
+          "InstalledUpdates":    { "type": "array" },
+          "ServiceAccounts":     { "type": ["object","null"] },
+          "Configuration":       { "type": ["object","null"] },
+          "Logins":              { "type": "array" },
+          "OrphanDatabaseUsers": { "type": "array" },
+          "LinkedServers":       { "type": "array" },
+          "Databases":           { "type": "array" },
+          "DiskLayout":          { "type": "array" },
+          "AvailabilityGroups":  { "type": "array" },
+          "AgentJobs":           { "type": "array" },
+          "Backups":             { "type": "array" },
+          "BackupDirectoryAcls": { "type": "array", "items": { "type": "object", "properties": { "Path": { "type": "string" }, "PathType": { "type": "string", "enum": ["UNC","Local"] }, "ReadFrom": { "type": ["string","null"], "enum": [null, "Jumphost", "Target"] }, "Owner": { "type": ["string","null"] }, "Inheritance": { "type": ["string","null"] }, "Entries": { "type": "array" }, "Error": { "type": ["string","null"] } } } },
+          "ConnectionMethod":    { "type": "string", "enum": ["TargetSideDbatools","JumphostSideDbatools","RegistryOnly","Failed"] },
+          "ConnectionError":     { "type": ["string","null"] },
+          "LiveQueryError":      { "type": ["string","null"] },
+          "LiveQueryAvailable":  { "type": "boolean" }
+        }
+      }
+    },
+    "Errors": { "type": "array" }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "node_name": "srv01.prod.example.com",
+  "run_list": ["role[base]", "role[appserver]", "recipe[mycookbook::install]"],
+  "default":   { "apache": {}, "mysql": {} },
+  "normal":    { "mycookbook": {} },
+  "override":  {},
+  "automatic": { "fqdn": "srv01.prod.example.com", "platform": "windows", "kernel": {}, "memory": {}, "filesystem": {} },
+  "end_time":  "2026-05-04T03:14:22Z"
+}
